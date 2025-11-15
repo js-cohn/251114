@@ -1,26 +1,24 @@
-// Wait for the document to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Get all the navigation links
-    const navLinks = document.querySelectorAll(".nav-link");
+    // Get all the navigation items
+    const navItems = document.querySelectorAll(".nav-item");
     
     // Get all the content panels
     const panels = document.querySelectorAll(".panel");
 
-    // Add a click event listener to each nav link
-    navLinks.forEach(link => {
-        link.addEventListener("click", (e) => {
-            // Stop the link from navigating (e.g., jumping to '#')
-            e.preventDefault(); 
+    // Add a click event listener to each nav item
+    navItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            // Use 'currentTarget' to get the nav-item div
+            const clickedItem = e.currentTarget; 
+            const targetId = clickedItem.getAttribute("data-target");
 
-            const targetId = link.getAttribute("data-target");
-
-            // 1. Remove 'active' class from all links and panels
-            navLinks.forEach(nav => nav.classList.remove("active"));
+            // 1. Remove 'active' class from all items and panels
+            navItems.forEach(nav => nav.classList.remove("active"));
             panels.forEach(panel => panel.classList.remove("active"));
 
-            // 2. Add 'active' class to the clicked link
-            link.classList.add("active");
+            // 2. Add 'active' class to the clicked item
+            clickedItem.classList.add("active");
 
             // 3. Add 'active' class to the corresponding panel
             const targetPanel = document.getElementById(targetId);

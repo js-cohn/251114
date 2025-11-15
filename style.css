@@ -1,39 +1,149 @@
-/* Basic styling for the example */
+/* --- Global Styles --- */
 body {
-    font-family: system-ui, sans-serif;
-    margin: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* This body background is just for testing, you won't see it in the iframe */
+    background-color: #f0f0f0; 
 }
 
+.component-container {
+    background-color: #0a193a; /* Dark blue background from video */
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 20px auto; /* 'margin' is for testing, won't affect iframe */
+}
+
+/* --- 1. Partner Ticker Styles --- */
+.partner-ticker {
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #1c3d7a; /* Separator line */
+}
+
+.partner-ticker h3 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #a9b9d9;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden; /* Hides the scrolling content */
+}
+
+.ticker-content {
+    display: flex;
+    width: max-content; /* Allows content to be in one long line */
+    /* Animation: name, duration, timing, iteration */
+    animation: scroll 30s linear infinite; 
+}
+
+.ticker-content span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #a9b9d9;
+    margin: 0 30px;
+    white-space: nowrap;
+}
+
+/* Scrolling animation */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Moves left by half its width */
+}
+
+
+/* --- 2. Main Content Wrapper --- */
 .component-wrapper {
     display: flex;
-    max-width: 900px;
+    padding-top: 20px;
 }
 
-.component-nav {
+/* --- 3. Circular Nav Styles --- */
+.circular-nav {
+    flex-basis: 300px; /* Fixed width for the nav area */
     display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    min-width: 200px;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
 }
 
-.nav-link {
+.nav-wheel {
+    position: relative;
+    width: 250px; /* Diameter of the wheel */
+    height: 250px;
+    border-radius: 50%;
+    border: 2px dashed #1c3d7a; /* Dashed circle from video */
+}
+
+.nav-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    
+    background-color: #1c3d7a;
+    color: #a9b9d9;
+    border: 3px solid #1c3d7a;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    /* This is the magic: move item to center, then use transform */
+    margin: -50px 0 0 -50px; 
+}
+
+.nav-item span {
     padding: 10px;
-    text-decoration: none;
-    color: #0078d4;
-    border-radius: 4px;
-    margin-bottom: 5px;
 }
 
-/* Style for the active link */
-.nav-link.active {
-    background-color: #f0f0f0;
-    font-weight: bold;
-    color: #333;
+.nav-item:hover {
+    background-color: #2a52a3;
+    border-color: #a9b9d9;
+}
+
+/* --- This positions the 5 items around the circle --- */
+/* We use transform: rotate() then translate() to push them out */
+.nav-item:nth-child(1) { transform: rotate(0deg)   translate(125px) rotate(0deg); }
+.nav-item:nth-child(2) { transform: rotate(72deg)  translate(125px) rotate(-72deg); }
+.nav-item:nth-child(3) { transform: rotate(144deg) translate(125px) rotate(-144deg); }
+.nav-item:nth-child(4) { transform: rotate(216deg) translate(125px) rotate(-216deg); }
+.nav-item:nth-child(5) { transform: rotate(288deg) translate(125px) rotate(-288deg); }
+
+/* Active state for the nav item */
+.nav-item.active {
+    background-color: #2a52a3;
+    border-color: #fff;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(173, 216, 230, 0.5);
+}
+
+
+/* --- 4. Content Panel Styles --- */
+.content-panels {
+    flex-grow: 1; /* Takes up the remaining space */
+    padding-left: 30px;
 }
 
 /* Hide all panels by default */
 .panel {
     display: none;
+    animation: fadeIn 0.4s ease-in-out; /* Fade-in effect */
 }
 
 /* Show *only* the active panel */
@@ -41,3 +151,21 @@ body {
     display: block;
 }
 
+.panel h3 {
+    font-size: 28px;
+    margin-top: 0;
+}
+
+.panel-columns {
+    display: flex;
+    gap: 20px;
+}
+.panel-columns > div {
+    flex-basis: 50%;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
