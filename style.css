@@ -1,0 +1,43 @@
+/* Basic styling for the example */
+body {
+    font-family: system-ui, sans-serif;
+    margin: 20px;
+}
+
+.component-wrapper {
+    display: flex;
+    max-width: 900px;
+}
+
+.component-nav {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    min-width: 200px;
+}
+
+.nav-link {
+    padding: 10px;
+    text-decoration: none;
+    color: #0078d4;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+/* Style for the active link */
+.nav-link.active {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Hide all panels by default */
+.panel {
+    display: none;
+}
+
+/* Show *only* the active panel */
+.panel.active {
+    display: block;
+}
+
